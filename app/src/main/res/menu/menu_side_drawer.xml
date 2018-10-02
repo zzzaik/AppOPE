@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_catalogo"
+            android:title="Cátalogo"
+            android:checked="true" />
+        <item android:id="@+id/nav_portfolio"
+            android:title="Portfólio" />
+        <item android:id="@+id/nav_horarios"
+            android:title="Horários" />
+        <item android:id="@+id/nav_sair"
+            android:title="Sair" />
+    </group>
+</menu>

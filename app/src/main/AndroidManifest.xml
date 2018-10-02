@@ -19,10 +19,15 @@
         <activity
             android:name=".InicioActivity"
             android:theme="@style/AppTheme.Toolbar" />
-        <activity android:name=".ConfiguracoesActivity"
-            android:theme="@style/AppTheme.Toolbar"/>
-        <activity android:name=".SelecionadoActivity"
-            android:theme="@style/AppTheme.Toolbar"/>
+        <activity
+            android:name=".ConfiguracoesActivity"
+            android:theme="@style/AppTheme.Toolbar" />
+        <activity
+            android:name=".SelecionadoActivity"
+            android:theme="@style/AppTheme.Toolbar" />
+        <activity android:name=".CatalogoActivity" />
+        <activity android:name=".PortfolioActivity" />
+        <activity android:name=".HorariosActivity"></activity>
     </application>
 
 </manifest>

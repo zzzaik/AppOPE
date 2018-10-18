@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3e3e3e</color>
     <color name="colorPrimaryDark">#252525</color>
     <color name="colorAccent">#0066ff</color>
+    <color name="colorTitulo">#f7f7f7</color>
+    <color name="colorFundo">#aa3d3d3d</color>
+    <color name="colorCardFundo">#FFFFFF</color>
+    <!--<color name="colorCard"-->
 </resources>

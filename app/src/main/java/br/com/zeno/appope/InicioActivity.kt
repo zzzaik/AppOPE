@@ -4,27 +4,61 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.VisibleForTesting
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import br.com.zeno.appope.R.id.*
 import kotlinx.android.synthetic.main.activity_inicio.*
+import kotlinx.android.synthetic.main.side_drawer_header.*
 import kotlinx.android.synthetic.main.toolbar.*
-import java.util.concurrent.Delayed
-import java.util.concurrent.TimeUnit
 
 class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val context get() = this
+    private var tattoos = listOf<Tattoo>()
+    var recyclerTattoo: RecyclerView? = null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        (menu?.findItem(R.id.actionBuscar)?.actionView as SearchView).setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+        })
         return true
+    }
+
+    fun taskTattoo(){
+        Thread {
+            this.tattoos = TattooService.getTattoo(context)
+            runOnUiThread {
+                recyclerTattoo?.adapter = TattooAdapter(this.tattoos) { onClickTattoo(it) }
+                enviaNotificacao(this.tattoos.get(0))
+
+            }
+        }.start()
+    }
+
+    fun enviaNotificacao(tattoo: Tattoo) {
+        val intent = Intent(this, TattooActivity::class.java)
+        intent.putExtra("tattoo", tattoo)
+        NotificationUtil.create(this, 1, intent, "APPOPE", "Atualização na tattoo ${tattoo.titulo}")
+    }
+
+    fun onClickTattoo(tattoo: Tattoo){
+        val intent = Intent(context, TattooActivity::class.java)
+        intent.putExtra("tattoo", tattoo)
+        startActivity(intent)
     }
 
     private fun configurarSideMenu() {
@@ -73,6 +107,8 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         supportActionBar?.title = "Inicio"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val login = textViewLogin
+        val texto = textNomeUsuario
+        texto?.text = "$user"
         login.text = "$user"
         login.visibility = View.VISIBLE
         btnOpcao1.setOnClickListener{onClickOpcao1()}
@@ -80,6 +116,11 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         btnOpcao3.setOnClickListener{onClickOpcao3()}
 
         configurarSideMenu()
+
+        recyclerTattoo = recyclerTattoo
+        recyclerTattoo?.layoutManager = LinearLayoutManager(context)
+        recyclerTattoo?.itemAnimator = DefaultItemAnimator()
+        recyclerTattoo?.setHasFixedSize(true)
     }
 
 

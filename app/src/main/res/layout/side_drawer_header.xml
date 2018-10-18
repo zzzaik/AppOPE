@@ -11,16 +11,17 @@
 
     <ImageView
         android:id="@+id/imageLogo"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="72dp"
+        android:layout_height="78dp"
         android:padding="15dp" />
 
     <TextView
         android:id="@+id/textNomeUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Usuário Maneiro"
+        android:fontFamily="@font/lobster_two"
         android:paddingTop="15dp"
-        android:fontFamily="@font/lobster_two"/>
+        android:text="0"
+        android:textSize="25sp" />
 
 </LinearLayout>

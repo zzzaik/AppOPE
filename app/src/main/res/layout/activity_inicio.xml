@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/textViewLogin"
             android:layout_width="match_parent"
@@ -32,31 +33,57 @@
             android:progress="0"
             android:visibility="gone" />
 
-        <Button
-            android:id="@+id/btnOpcao1"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Opção 1"
-            android:visibility="visible" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btnOpcao2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Opção 2"
-            android:visibility="visible" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/btnOpcao3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Opção 3"
-            android:visibility="visible" />
+                <Button
+                    android:id="@+id/btnOpcao3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Opção 3"
+                    android:visibility="visible" />
 
-        <ListView
-            android:id="@+id/SeachView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnOpcao1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Opção 1"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/btnOpcao2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Opção 2"
+                    android:visibility="visible" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerTattoos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:listSelector="@android:color/transparent"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbars="vertical">
+                </android.support.v7.widget.RecyclerView>
+                <!--<ListView-->
+                    <!--android:id="@+id/SeachView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                <!--</ListView>-->
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

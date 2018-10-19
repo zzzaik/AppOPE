@@ -4,31 +4,32 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-object TattooService {
+object UserService {
+
 
     val host = "http://draco.pythonanywhere.com"
     val TAG = "WS_AppOpe"
 
-    fun getTattoo (context: Context): List<Tattoo> {
-        var tattoos = ArrayList<Tattoo>()
+    fun getUsers (context: Context): List<Users> {
+        var usuarios = ArrayList<Users>()
         if (AndroidUtils.isInternetDisponivel(context)) {
-            val url = "$host/tattoos"
+            val url = "$host/users"
             val json = HttpHelper.get(url)
-            tattoos = parserJson(json)
+            usuarios = parserJson(json)
 
-            return tattoos
+            return usuarios
         }
-        return tattoos
+        return ArrayList<Users>()
     }
 
 
-    fun save(tattoo: Tattoo): Response {
-        val json = HttpHelper.post("$host/tattoo", tattoo.toJson())
+    fun save(users: Users): Response {
+        val json = HttpHelper.post("$host/users", users.toJson())
         return parserJson(json)
     }
 
-    fun delete(tattoo: Tattoo): Response {
-        val url = "$host/tattoo/${tattoo.id}"
+    fun delete(users: Users): Response {
+        val url = "$host/users/${users.id}"
         val json = HttpHelper.delete(url)
         return parserJson(json)
     }

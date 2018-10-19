@@ -38,21 +38,18 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         return true
     }
 
+    override fun onResume() {
+        super.onResume()
+        taskTattoo()
+    }
+
     fun taskTattoo(){
         Thread {
             this.tattoos = TattooService.getTattoo(context)
             runOnUiThread {
                 recyclerTattoo?.adapter = TattooAdapter(this.tattoos) { onClickTattoo(it) }
-                enviaNotificacao(this.tattoos.get(0))
-
             }
         }.start()
-    }
-
-    fun enviaNotificacao(tattoo: Tattoo) {
-        val intent = Intent(this, TattooActivity::class.java)
-        intent.putExtra("tattoo", tattoo)
-        NotificationUtil.create(this, 1, intent, "APPOPE", "Atualização na tattoo ${tattoo.titulo}")
     }
 
     fun onClickTattoo(tattoo: Tattoo){
@@ -103,48 +100,47 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
         setSupportActionBar(toolbar)
-        var user = intent.getStringExtra("nome")
+        val args:Bundle? = intent.extras
+        val user = args?.getString("nome")
         supportActionBar?.title = "Inicio"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val login = textViewLogin
-        val texto = textNomeUsuario
-        texto?.text = "$user"
         login.text = "$user"
         login.visibility = View.VISIBLE
-        btnOpcao1.setOnClickListener{onClickOpcao1()}
-        btnOpcao2.setOnClickListener{onClickOpcao2()}
-        btnOpcao3.setOnClickListener{onClickOpcao3()}
+//        btnOpcao1.setOnClickListener{onClickOpcao1()}
+//        btnOpcao2.setOnClickListener{onClickOpcao2()}
+//        btnOpcao3.setOnClickListener{onClickOpcao3()}
 
         configurarSideMenu()
 
-        recyclerTattoo = recyclerTattoo
+        recyclerTattoo = findViewById<RecyclerView>(R.id.recyclerTattoos)
         recyclerTattoo?.layoutManager = LinearLayoutManager(context)
         recyclerTattoo?.itemAnimator = DefaultItemAnimator()
         recyclerTattoo?.setHasFixedSize(true)
     }
 
-
-
-    fun onClickOpcao1(){
-        val strBtn = btnOpcao1.text.toString()
-        var opcao = Intent(context, SelecionadoActivity::class.java)
-        opcao.putExtra("escolha", strBtn)
-        startActivityForResult(opcao, 0)
-    }
-
-    fun onClickOpcao2(){
-        val strBtn = btnOpcao2.text.toString()
-        var opcao = Intent(context, SelecionadoActivity::class.java)
-        opcao.putExtra("escolha", strBtn)
-        startActivityForResult(opcao, 1)
-    }
-
-    fun onClickOpcao3(){
-        val strBtn = btnOpcao3.text.toString()
-        var opcao = Intent(context, SelecionadoActivity::class.java)
-        opcao.putExtra("escolha", strBtn)
-        startActivityForResult(opcao, 2)
-    }
+//
+//
+//    fun onClickOpcao1(){
+//        val strBtn = btnOpcao1.text.toString()
+//        var opcao = Intent(context, SelecionadoActivity::class.java)
+//        opcao.putExtra("escolha", strBtn)
+//        startActivityForResult(opcao, 0)
+//    }
+//
+//    fun onClickOpcao2(){
+//        val strBtn = btnOpcao2.text.toString()
+//        var opcao = Intent(context, SelecionadoActivity::class.java)
+//        opcao.putExtra("escolha", strBtn)
+//        startActivityForResult(opcao, 1)
+//    }
+//
+//    fun onClickOpcao3(){
+//        val strBtn = btnOpcao3.text.toString()
+//        var opcao = Intent(context, SelecionadoActivity::class.java)
+//        opcao.putExtra("escolha", strBtn)
+//        startActivityForResult(opcao, 2)
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         var id = item?.itemId

@@ -9,6 +9,7 @@ import java.time.Instant
 
 class LoginActivity : AppCompatActivity() {
     private val context get() = this
+    private var users = listOf<Users>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -23,6 +24,8 @@ class LoginActivity : AppCompatActivity() {
         val campoSenha = editTextSenha
         val strLogin = campoLogin.text.toString()
         val strSenha = campoSenha.text.toString()
+        var users = taskUsers()
+        Toast.makeText(context, "$users",Toast.LENGTH_LONG).show()
         if (strLogin == "aluno" && strSenha == "impacta") {
             val intent = Intent(context, InicioActivity::class.java)
             intent.putExtra("nome", strLogin)
@@ -30,5 +33,11 @@ class LoginActivity : AppCompatActivity() {
         } else {
             Toast.makeText(context, "Login ou senha icorretos!", Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun taskUsers(){
+        Thread {
+            this.users = UserService.getUsers(context)
+        }.start()
     }
 }

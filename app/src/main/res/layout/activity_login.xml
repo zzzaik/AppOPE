@@ -47,6 +47,13 @@
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="174dp" />
 
+    <CheckBox
+        android:id="@+id/checkBoxLembrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lembrar de mim"
+        android:textSize="18sp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"

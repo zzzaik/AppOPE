@@ -1,10 +1,9 @@
 package br.com.zeno.appope
 
-import android.content.Context
 import android.content.SharedPreferences
 
 object Prefs {
-    val PREF_ID = "APPOPE"
+    val PREF_ID = "LMS"
 
     private fun prefs(): SharedPreferences {
         val context = AppOpeApplication.getInstance().applicationContext

@@ -13,7 +13,7 @@ class AppOpeApplication: Application() {
         private var appInstance: AppOpeApplication?  = null
         fun getInstance(): AppOpeApplication {
             if (appInstance == null) {
-                throw IllegalStateException("Configurar application no Android Manifest")
+                throw IllegalStateException("Configure application no Android Manifest")
             }
             return appInstance!!
         }

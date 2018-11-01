@@ -33,6 +33,14 @@ class LoginActivity : AppCompatActivity() {
         } else {
             Toast.makeText(context, "Login ou senha icorretos!", Toast.LENGTH_LONG).show()
         }
+        onClickLembrar(strLogin, strSenha)
+    }
+
+    fun onClickLembrar(strLogin: String, strSenha: String){
+        if (checkBoxLembrar.isChecked()){
+            Prefs.setString("Login", "$strLogin")
+            Prefs.setString("Senha", "$strSenha")
+        }
     }
 
     fun taskUsers(){

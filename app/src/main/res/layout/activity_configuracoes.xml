@@ -6,5 +6,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".ConfiguracoesActivity">
+    <include layout="@layout/toolbar"/>
 
 </LinearLayout>

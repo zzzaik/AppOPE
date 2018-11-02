@@ -48,6 +48,7 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             this.tattoos = TattooService.getTattoo(context)
             runOnUiThread {
                 recyclerTattoo?.adapter = TattooAdapter(this.tattoos) { onClickTattoo(it) }
+                enviaNotificacao(this.tattoos.get(0))
             }
         }.start()
     }
@@ -61,6 +62,19 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private fun configurarSideMenu() {
         var toolbar = toolbar
         var menuLateral = layoutSideMenu
+        val args:Bundle? = intent.extras
+        val user = args?.getString("login")
+//        var txtNomeUser = textNomeUsuario
+//        System.out.println(user)
+//        Toast.makeText(context, "$user", Toast.LENGTH_LONG).show()
+//        if (user == null) {
+//            textNomeUsuario.setText("NOME NÃO ENCONTRADO")
+////            txtNomeUser.text = "NOME NÃO ENCONTRADO"
+//        } else {
+//            textNomeUsuario.setText(user)
+////            txtNomeUser.text = "$user"
+//        }
+
 
         var toggle = ActionBarDrawerToggle(context,menuLateral,toolbar,R.string.nav_drawer_open,R.string.nav_drawer_close)
 
@@ -69,6 +83,12 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         val navigationView = sideMenu
         navigationView.setNavigationItemSelectedListener(this)
+    }
+
+    fun enviaNotificacao(tattoo: Tattoo) {
+        val intent = Intent(this, TattooActivity::class.java)
+        intent.putExtra("tattoo", tattoo)
+        NotificationUtil.create(this, 1, intent, "Tattoo", "Você tem nova tattoo na ${tattoo.titulo}")
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -101,15 +121,12 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         setContentView(R.layout.activity_inicio)
         setSupportActionBar(toolbar)
         val args:Bundle? = intent.extras
-        val user = args?.getString("nome")
+        val user = args?.getString("login")
         supportActionBar?.title = "Inicio"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val login = textViewLogin
         login.text = "$user"
         login.visibility = View.VISIBLE
-//        btnOpcao1.setOnClickListener{onClickOpcao1()}
-//        btnOpcao2.setOnClickListener{onClickOpcao2()}
-//        btnOpcao3.setOnClickListener{onClickOpcao3()}
 
         configurarSideMenu()
 
@@ -119,36 +136,14 @@ class InicioActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         recyclerTattoo?.setHasFixedSize(true)
     }
 
-//
-//
-//    fun onClickOpcao1(){
-//        val strBtn = btnOpcao1.text.toString()
-//        var opcao = Intent(context, SelecionadoActivity::class.java)
-//        opcao.putExtra("escolha", strBtn)
-//        startActivityForResult(opcao, 0)
-//    }
-//
-//    fun onClickOpcao2(){
-//        val strBtn = btnOpcao2.text.toString()
-//        var opcao = Intent(context, SelecionadoActivity::class.java)
-//        opcao.putExtra("escolha", strBtn)
-//        startActivityForResult(opcao, 1)
-//    }
-//
-//    fun onClickOpcao3(){
-//        val strBtn = btnOpcao3.text.toString()
-//        var opcao = Intent(context, SelecionadoActivity::class.java)
-//        opcao.putExtra("escolha", strBtn)
-//        startActivityForResult(opcao, 2)
-//    }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         var id = item?.itemId
         if (id == actionBuscar) {
 //            Toast.makeText(context, "Buscar", Toast.LENGTH_SHORT).show()
         }
         else if (id == actionAdicionar) {
-            Toast.makeText(context, "Adicionar", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, AdicionarActivity::class.java)
+            startActivityForResult(intent, 0)
         }
         else if (id == actionAtualizar) {
             val progressBar = progressBarAtualizar

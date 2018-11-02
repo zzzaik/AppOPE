@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.zeno.appope">
-    
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".AppOpeApplication"
@@ -29,16 +29,26 @@
         <activity
             android:name=".SelecionadoActivity"
             android:theme="@style/AppTheme.Toolbar" />
-        <activity android:name=".CatalogoActivity" />
-        <activity android:name=".PortfolioActivity" />
-        <activity android:name=".HorariosActivity" />
-        <activity android:name=".TattooActivity"></activity>
+        <activity
+            android:name=".CatalogoActivity"
+            android:theme="@style/AppTheme.Toolbar"/>
+        <activity
+            android:name=".PortfolioActivity"
+            android:theme="@style/AppTheme.Toolbar"/>
+        <activity
+            android:name=".HorariosActivity"
+            android:theme="@style/AppTheme.Toolbar"/>
+        <activity
+            android:name=".TattooActivity"
+            android:theme="@style/AppTheme.Toolbar"/>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".AdicionarActivity"></activity>
     </application>
 
 </manifest>
